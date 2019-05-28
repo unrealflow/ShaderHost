@@ -94,7 +94,7 @@ int main()
     // glEnable(GL_DEPTH_TEST);
 
     //读取、编译Shader
-    Shader ourShader("shader_vs.vs", "GrassyHill.glsl");
+    Shader ourShader("shader_vs.vs", "Pp.glsl");
 
     //载入模型
     // Model ourModel(("Model/Plane.dae"));
