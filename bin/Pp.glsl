@@ -55,11 +55,11 @@ vec4 render( in vec3 ro, in vec3 rd, float time )
 	vec4 rez = vec4(0);
     const float ldst = 8.;
 	vec3 lpos = vec3(disp(time + ldst)*0.5, time + ldst);
-	float t = 1.5;
+	float t = 1.5*3.0;
 	float fogT = 0.;
-	for(int i=0; i<130; i++)
+	for(int i=0; i<40; i++)
 	{
-		if(rez.a > 0.99)break;
+		if(rez.a > 0.8)break;
 
 		vec3 pos = ro + t*rd;
         vec2 mpv = map(pos);
@@ -67,7 +67,7 @@ vec4 render( in vec3 ro, in vec3 rd, float time )
 		float dn = clamp((mpv.x + 2.),0.,3.);
         
 		vec4 col = vec4(0);
-        if (mpv.x > 0.6)
+        if (mpv.x > 0.3)
         {
         
             col = vec4(sin(vec3(5.,0.4,0.2) + mpv.y*0.1 +sin(pos.z*0.4)*0.5 + 1.8)*0.5 + 0.5,0.08);
@@ -79,7 +79,7 @@ vec4 render( in vec3 ro, in vec3 rd, float time )
         }
 		
 		float fogC = exp(t*0.2 - 2.2);
-		col.rgba += vec4(0.06,0.11,0.11, 0.1)*clamp(fogC-fogT, 0., 1.);
+		col.rgba += vec4(0.06,0.11,0.11, 0.5)*clamp(fogC-fogT, 0., 1.);
 		fogT = fogC;
 		rez = rez + col*(1. - rez.a);
 		t += clamp(0.5 - dn*dn*.05, 0.09, 0.3);
